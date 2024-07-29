@@ -1,4 +1,6 @@
 from nicegui import ui
+from ppf.datamatrix import DataMatrix
+import PIL.Image as Image
 
 with ui.grid(columns=7).classes('w-full'):
     with ui.column().classes('col-span-7'):
@@ -46,11 +48,19 @@ with ui.grid(columns=7).classes('w-full'):
             recipient_country.value = None
             recipient_email.value = None
 
+        # from pylibdmtx.pylibdmtx import encode
+        # encoded = encode('hello world'.encode('utf8'))
+        # img = Image.frombytes('RGB', (encoded.width, encoded.height), encoded.pixels)
+        # img.save('dmtx.png')
+        # print(decode(Image.open('dmtx.png')))
         def generate_form():
-            recipient_country_form = recipient_country.value.lower()
+            shipper_alias_barcode = DataMatrix(shipper_alias.value)
+            shipper_alias_barcode_img = Image.frombytes('RGB', (shipper_alias_barcode.width, shipper_alias_barcode.height), shipper_alias.value.pixels)
+            shipper_alias_barcode_img.save('testDM.jpg')
+
 
 ui.button('Reset', on_click=reset)
-ui.button('Generate Form', on_click=generate_form)
+ui.button('Generate Form', on_click=lambda e: generate_form)
 
 ui.run(title='Mail and Ship Form', favicon='package.png')
 #ui.run(native=True, window_size=(400, 300), fullscreen=False, title='Mail and Ship Form', favicon='th.jpg')
