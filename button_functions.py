@@ -1,4 +1,5 @@
 import os
+from nicegui.elements.mixins.value_element import ValueElement
 import shipping_form as sf
 from pylibdmtx.pylibdmtx import encode
 import jinja2
@@ -6,24 +7,17 @@ import pdfkit
 import PIL.Image as Image
 
 
-def reset():
-    sf.shipper_name.value = None
-    sf.shipper_alias.value = None
-    sf.recipient_company.value = None
-    sf.recipient_name.value = None
-    sf.recipient_phone.value = None
-    sf.recipient_address_line1.value = None
-    sf.recipient_address_line2.value = None
-    sf.recipient_address_line3.value = None
-    sf.recipient_city.value = None
-    sf.recipient_state.value = None
-    sf.recipient_country.value = None
-    sf.recipient_zip.value = None
-    sf.recipient_email.value = None
-
+def reset(recipient_grid,shipper_grid):
+    for child in recipient_grid.default_slot.children:
+        if isinstance(child, ValueElement):
+            child.value = None
+    for child in shipper_grid.default_slot.children:
+        if isinstance(child, ValueElement):
+            child.value = None
 
 def generate_form(user_path):
     T = '\t'
+
     shipper_alias_barcode = encode(data=sf.shipper_alias.value.encode("utf8"))
     shipper_alias_barcode_img = Image.frombytes('RGB',
                                                 (shipper_alias_barcode.width, shipper_alias_barcode.height),
@@ -38,7 +32,7 @@ def generate_form(user_path):
     recipient_barcode_img.save('recipient_barcode.jpg')
 
     data_elements = {
-        'alias': sf.shipper_phone.value,
+        'alias': shipper_alias.value,
         'ship_from_name': sf.shipper_name.value,
         'ship_from_phone': sf.shipper_phone.value,
         'company_name': sf.recipient_company.value,
