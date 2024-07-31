@@ -7,7 +7,7 @@ import pdfkit
 import PIL.Image as Image
 
 
-def reset(recipient_grid,shipper_grid):
+def reset(recipient_grid, shipper_grid):
     for child in recipient_grid.default_slot.children:
         if isinstance(child, ValueElement):
             child.value = None
@@ -15,10 +15,10 @@ def reset(recipient_grid,shipper_grid):
         if isinstance(child, ValueElement):
             child.value = None
 
-def generate_form(user_path):
+def generate_form(user_path, recipient_grid, shipper_grid):
     T = '\t'
 
-    shipper_alias_barcode = encode(data=sf.shipper_alias.value.encode("utf8"))
+    shipper_alias_barcode = encode(data=recipient_grid.shipper_alias.value.encode("utf8"))
     shipper_alias_barcode_img = Image.frombytes('RGB',
                                                 (shipper_alias_barcode.width, shipper_alias_barcode.height),
                                                 shipper_alias_barcode.pixels)
