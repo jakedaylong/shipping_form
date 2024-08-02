@@ -1,9 +1,9 @@
 import shipping_form as sf
+import directory_creation as dc
+import button_functions as bf
+import test_file as tf
+from nicegui import ui
+import os
 
 
-def main():
-    sf.shipping_form()
 
-
-if __name__ in {'__main__', '__mp_main__'}:
-    main()

@@ -2,16 +2,8 @@ from nicegui import ui
 import os
 import directory_creation as dc
 import button_functions as bf
-import test_file as tf
-
-def main():
-    sf.shipping_form()
-
-
-
 
 user_path = os.path.expanduser('~')
-
 dc.check_directory(user_path)
 dc.mkfile(user_path)
 
@@ -49,11 +41,7 @@ with ui.grid(columns=7).classes('w-full') as shipto_grid:
 
 ui.button('Reset', on_click=lambda: bf.reset(recipient_grid, shipper_grid))
 ui.button('Generate Form', on_click=lambda: bf.generate_form(user_path))
-ui.button("test_print", on_click=lambda: tf.print(recipient_grid))
+
 
 ui.run(title='Mail and Ship Form', favicon='package.png')
 # ui.run(native=True, window_size=(400, 300), fullscreen=False, title='Mail and Ship Form', favicon='th.jpg')
-
-
-if __name__ in {'__main__', '__mp_main__'}:
-    main()

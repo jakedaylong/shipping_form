@@ -15,10 +15,11 @@ def reset(recipient_grid, shipper_grid):
         if isinstance(child, ValueElement):
             child.value = None
 
-def generate_form(user_path, recipient_grid, shipper_grid):
+
+def generate_form(user_path):
     T = '\t'
 
-    shipper_alias_barcode = encode(data=recipient_grid.shipper_alias.value.encode("utf8"))
+    shipper_alias_barcode = encode(data=sf.shipper_alias.value.encode("utf8"))
     shipper_alias_barcode_img = Image.frombytes('RGB',
                                                 (shipper_alias_barcode.width, shipper_alias_barcode.height),
                                                 shipper_alias_barcode.pixels)
@@ -32,7 +33,7 @@ def generate_form(user_path, recipient_grid, shipper_grid):
     recipient_barcode_img.save('recipient_barcode.jpg')
 
     data_elements = {
-        'alias': shipper_alias.value,
+        'alias': sf.shipper_alias.value,
         'ship_from_name': sf.shipper_name.value,
         'ship_from_phone': sf.shipper_phone.value,
         'company_name': sf.recipient_company.value,
