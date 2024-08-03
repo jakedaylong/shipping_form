@@ -2,11 +2,14 @@ import os
 
 
 def check_directory(user_path):
+# checks for existing directory at the below path
     if not os.path.exists(user_path + r'\Documents\Barcodes'):
         os.mkdir(user_path + r'\Documents\Barcodes')
 
 
 def mkfile(user_path):
+# checks for existing pdf_html.html file and creates it from the below code if necessary 
+# currently html file needs to be edited after creation to correct img paths. will correct later
     if not os.path.exists(user_path + r'\Documents\Barcodes\pdf_html.html'):
         html_str = """
         <h2>Please fill out the form with applicable Ship From and Ship To information, Print and Clear the
