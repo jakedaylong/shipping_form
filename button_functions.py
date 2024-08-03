@@ -23,14 +23,14 @@ def generate_form(user_path):
     shipper_alias_barcode_img = Image.frombytes('RGB',
                                                 (shipper_alias_barcode.width, shipper_alias_barcode.height),
                                                 shipper_alias_barcode.pixels)
-    shipper_alias_barcode_img.save('alias_barcode.jpg')
+    shipper_alias_barcode_img.save(user_path + r'\Documents\Barcodes\alias_barcode.jpg')
 
     recipient_barcode_concat = sf.recipient_company.value + T + sf.recipient_name.value + T + sf.recipient_address_line1.value + T + sf.recipient_address_line2.value + T + sf.recipient_address_line3.value + T + sf.recipient_city.value + T + T + T + sf.recipient_zip.value + T + sf.recipient_phone.value + T + sf.recipient_email.value
     recipient_barcode = encode(data=recipient_barcode_concat.encode("utf8"))
     recipient_barcode_img = Image.frombytes('RGB',
                                             (recipient_barcode.width, recipient_barcode.height),
                                             recipient_barcode.pixels)
-    recipient_barcode_img.save('recipient_barcode.jpg')
+    recipient_barcode_img.save(user_path + r'\Documents\Barcodes\recipient_barcode.jpg')
 
     data_elements = {
         'alias': sf.shipper_alias.value,
