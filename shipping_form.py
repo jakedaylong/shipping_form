@@ -3,12 +3,12 @@ import os
 import directory_creation as dc
 import button_functions as bf
 
-# acquires user path and runs directory_check and mkfile functions
+"""acquires user path and runs directory_check and mkfile functions"""
 user_path = os.path.expanduser('~')
 dc.check_directory(user_path)
 dc.mkfile(user_path)
 
-# shipper UI grid
+"""shipper UI grid"""
 with ui.grid(columns=7).classes('w-full'):
     with ui.column().classes('col-span-7'):
         ui.label('Mail and Shipping Form').style('font-size: 24px; font-weight: bold')
@@ -22,7 +22,7 @@ with ui.grid(columns=7).classes('w-full'):
 
 ui.separator()
 
-# recipient UI grid
+"""recipient UI grid"""
 with ui.grid(columns=7).classes('w-full') as shipto_grid:
     with ui.column().classes("col-span-1"):
         ui.label('Ship To:').style('font-size: 20px; font-weight: bold')
@@ -42,10 +42,10 @@ with ui.grid(columns=7).classes('w-full') as shipto_grid:
         recipient_zip = ui.input(label='Zip', placeholder='zip', value='')
         recipient_email = ui.input(label='Email', placeholder='contact email', value='')
 
-# button functions
+"""button functions"""
 ui.button('Reset', on_click=lambda: bf.reset(recipient_grid, shipper_grid))
 ui.button('Generate Form', on_click=lambda: bf.generate_form(user_path))
 
-# option to run this in native window
+"""option to run this in native window"""
 ui.run(title='Mail and Ship Form', favicon='package.png')
 # ui.run(native=True, window_size=(400, 300), fullscreen=False, title='Mail and Ship Form', favicon='th.jpg')
