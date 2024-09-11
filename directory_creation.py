@@ -10,8 +10,7 @@ def check_directory(user_path):
 def mkfile(user_path):
     """checks for existing pdf_html.html file and creates it from the below code if necessary
     currently html file needs to be edited after creation to correct img paths. will correct later"""
-    user_path_docs = os.path.join('"' + user_path, 'Documents' + '"')
-    user_path_html = os.path.join('"' + user_path, 'Documents\\pdf_html.html' + '"')
+    user_path_html = os.path.join('"' + user_path, 'Documents\\Barcodes\\pdf_html.html' + '"')
     if not os.path.exists(user_path_html):
         html_str = """
         <h2>Please fill out the form with applicable Ship From and Ship To information, Print and Clear the
@@ -80,12 +79,11 @@ def mkfile(user_path):
                 <td align="center">Recipient Barcode</td>
                 </tr>
             <tr>
-                <td colspan="2" align="center"><img src="C:\\Users\\{user_name}\\Documents\\Barcodes\\recipient_barcode.jpg" alt=""></td>
+                <td colspan="2" align="center"><img src={{recipient_path}} alt=""></td>
             </tr>
         </tbody>
         </table>
-    
-    
+        
         <br>
         <br>
         <br>
@@ -94,13 +92,14 @@ def mkfile(user_path):
         <br>
         <br>
         <br>
+        
         <table style="border-collapse: collapse; width: 100%;">
             <tbody>
             <tr>
                 <td colspan="2" align="center">Alias</td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><img src="C:\\Users\\{user_name}\\Documents\\Barcodes\\alias_barcode.jpg"></td>
+                <td colspan="2" align="center"><img src={{alias_path}}></td>
             </tr>
         </tbody>
         </table>

@@ -10,7 +10,7 @@ dc.mkfile(user_path)
 
 """shipper UI grid"""
 with ui.grid(columns=7).classes('w-full'):
-    with ui.column().classes('col-span-7'):
+    with ui.grid(columns=1):
         ui.label('Mail and Shipping Form').style('font-size: 24px; font-weight: bold')
 with ui.grid(columns=7).classes('w-full'):
     with ui.column().classes("col-span-1"):
@@ -23,8 +23,8 @@ with ui.grid(columns=7).classes('w-full'):
 ui.separator()
 
 """recipient UI grid"""
-with ui.grid(columns=7).classes('w-full') as shipto_grid:
-    with ui.column().classes("col-span-1"):
+with ui.grid(columns=7).classes('w-full'):
+    with ui.grid(columns=1):
         ui.label('Ship To:').style('font-size: 20px; font-weight: bold')
     with ui.grid(columns=3).classes('col-span-5') as recipient_grid:
         recipient_company = ui.input(label='Company', placeholder='company name', value='')
@@ -44,8 +44,24 @@ with ui.grid(columns=7).classes('w-full') as shipto_grid:
 
 """button functions"""
 ui.button('Reset', on_click=lambda: bf.reset(recipient_grid, shipper_grid))
-ui.button('Generate Form', on_click=lambda: bf.generate_form(user_path))
+ui.button('Generate Form', on_click=lambda: bf.generate_form(user_path,
+                                                             shipper_alias,
+                                                             shipper_name,
+                                                             shipper_phone,
+                                                             recipient_company,
+                                                             recipient_city,
+                                                             recipient_name,
+                                                             recipient_address_line1,
+                                                             recipient_address_line2,
+                                                             recipient_address_line3,
+                                                             recipient_country,
+                                                             recipient_state,
+                                                             recipient_zip,
+                                                             recipient_phone,
+                                                             recipient_email))
+
+ui.separator()
 
 """option to run this in native window"""
 ui.run(title='Mail and Ship Form', favicon='package.png')
-# ui.run(native=True, window_size=(400, 300), fullscreen=False, title='Mail and Ship Form', favicon='th.jpg')
+
